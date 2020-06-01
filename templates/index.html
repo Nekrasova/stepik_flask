@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+   <div class="content">
+     <h2>{{ heading }}</h2>
+       <p>{{ line|truncate(50) }}</p>
+   </div>
+
+{% endblock %}
