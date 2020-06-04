@@ -5,9 +5,9 @@ import random
 ### Import source data
 import static.data as data
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/')
+@application.route('/')
 def render_main():
     return render_template('index.html',
                            title=data.title,
@@ -17,7 +17,7 @@ def render_main():
                            departures=data.departures
                            )
 
-@app.route('/departures/<departure>/')
+@application.route('/departures/<departure>/')
 def render_departure(departure):
     return render_template('departure.html',
                            title=data.title,
@@ -25,7 +25,7 @@ def render_departure(departure):
                            hotel_list=dict(data.tours.items())
                            )
 
-@app.route('/tours/<hotel_id>/')
+@application.route('/tours/<hotel_id>/')
 def render_tours(hotel_id):
     return render_template('tour.html',
                            title=data.title,
@@ -40,11 +40,12 @@ def render_tours(hotel_id):
                            hotel_description=data.tours[int(hotel_id)]['description']
                            )
 
-@app.route('/booking/')
+@application.route('/booking/')
 def render_booking():
     return render_template('booking.html',
                            title=data.title,
                            departures=data.departures
                            )
 
-app.run(debug=True)
+if __name__ == '__main__':
+    application.run()
