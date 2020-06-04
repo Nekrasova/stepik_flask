@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+    <div class="row mt-5">{% for hotel in hotel_list %}{% if request.path == '/departures/'+ departures[hotel_list[hotel]["departure"]] + '/'%}
+      <div class="col-4">
+        <div class="card mb-4">
+          <div class="embed-responsive embed-responsive-16by9">
+             <img class="card-img-top embed-responsive-item" src={{ hotel_list[hotel]["picture"] }} alt="" />
+          </div>
+          <div class="card-body">
+            <h2 class="h5 card-title"> {{ hotel_list[hotel]["title"] }} </h2>
+            <p class="card-text">{{ hotel_list[hotel]["description"]|truncate(94)}}</p>
+            <a href="/tours/{{ hotel }}/" class="btn btn-sm btn-primary">Подробнее</a>
+          </div>
+        </div>
+      </div>{% endif %}{% endfor %}
+    </div>
+{% endblock %}
