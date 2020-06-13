@@ -21,11 +21,11 @@ received after the web visitor has fulfilled and submitted one of the two availa
 and test whatever you want.
 
 2) If you want to test the json data base maintanance, please do the following:
-* Delete these following files:
-  ** `static/booking.json`
-  ** `static/request.json`
-  ** `static/teachers.json`
-  ** `static/goals.json`
+* Delete these following files:<br>
+  ** `static/booking.json`<br>
+  ** `static/request.json`<br>
+  ** `static/teachers.json`<br>
+  ** `static/goals.json`<br>
 * Run first the data_to_json.py file to recreate the input json data( `static/teachers.json` and `static/goals.json`)
 * Run app.py file to test the recreation of the output json data (`static/booking.json` and `static/request.json`) 
 * Check that every time you fill out the form, it is stored without being overwritten in one of these files (depending on the initial web page
