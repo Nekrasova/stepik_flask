@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block container %}
+
+    <div class="card my-4 mx-auto">
+      <div class="card-body m-2 m-md-4">
+        <article class="row">
+          <div class="col-5"><img src= {{ teacher_picture }} class="img-fluid" alt=""></div>
+          <div class="col-7">
+
+            <section class="teacher=info">
+
+              <h1 class="h2">{{ teacher_name }} </h1>
+              <p>{% for goal in teacher_goals %}
+                  <span class="badge badge-secondary mr-2">
+                  <a href="/goals/{{goal}}" style="color:white">{{ goals[goal] }}</a>
+                  </span>{% endfor %}
+                  <span class="badge badge-secondary mr-2">Рейтинг: {{ teacher_rating }} Стоимость: {{ teacher_price}} / час</span>
+              </p>
+              <p>{{ teacher_about }}</p>
+
+            </section>
+
+            <section class="available">
+
+              <h4 class="mb-4 mt-5">Записаться на пробный урок</h4>{% for day, hours in teacher_schedule.items() %}
+              <h6 class="mt-4">{{ days[day] }}</h6>
+                {% if hours != 'No classes' %}
+                {% for hour in hours %}
+               <a href="/booking/{{ id_teacher }}/{{ day }}/{{ hour }}/" class="btn btn-outline-success mr-2">{{ hour }} свободно</a>{% endfor %}
+                {% else %}
+                <p>Нет свободных уроков</p>{% endif %}{% endfor %}
+            </section>
+          </div>
+        </article>
+      </div>
+    </div>
+{% endblock %}
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
