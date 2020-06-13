@@ -4,7 +4,7 @@ import os
 import random
 import string
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 goals = json.load(open("static/goals.json", "r"))
 teachers = json.load(open("static/teachers.json", "r"))
@@ -25,7 +25,7 @@ goals_pics = {'relocate': '🚜',
               }
 
 
-@app.route('/')
+@application.route('/')
 def render_main():
     return render_template('index.html',
                            goals=goals,
@@ -33,7 +33,7 @@ def render_main():
                            teachers=random.sample(teachers, k=6))
 
 
-@app.route('/teachers/')
+@application.route('/teachers/')
 def render_teachers():
     sorted_teachers = sorted(list([x for x in teachers]), key=lambda i: i['rating'], reverse=True)
     return render_template('teachers.html',
@@ -43,7 +43,7 @@ def render_teachers():
                            )
 
 
-@app.route('/goals/<id_goal>')
+@application.route('/goals/<id_goal>')
 def render_goal(id_goal):
     sorted_teachers = sorted(list([x for x in teachers if id_goal in x['goals']]), key=lambda i: i['rating'],
                              reverse=True)
@@ -61,7 +61,7 @@ def render_goal(id_goal):
         return '404 Not Found', 404
 
 
-@app.route('/profiles/<int:id_teacher>/')
+@application.route('/profiles/<int:id_teacher>/')
 def render_profile(id_teacher):
     id_teacher = id_teacher
     teacher_schedule = teachers[id_teacher]['free']
@@ -89,12 +89,12 @@ def render_profile(id_teacher):
         return '404 Not Found', 404
 
 
-@app.route('/request/')
+@application.route('/request/')
 def render_request():
     return render_template('request.html')
 
 
-@app.route('/request_done/', methods=['POST'])
+@application.route('/request_done/', methods=['POST'])
 def render_request_done():
     clientName = request.form.get("clientName")
     clientPhone = request.form.get("clientPhone")
@@ -126,7 +126,7 @@ def render_request_done():
                                    )
 
 
-@app.route('/booking/<int:id_teacher>/<id_week_day>/<time>/')
+@application.route('/booking/<int:id_teacher>/<id_week_day>/<time>/')
 def render_booking(id_teacher, id_week_day, time):
     id_teacher = teachers[id_teacher]['id']
     return render_template('booking.html',
@@ -139,7 +139,7 @@ def render_booking(id_teacher, id_week_day, time):
                            )
 
 
-@app.route('/booking_done/', methods=['POST'])
+@application.route('/booking_done/', methods=['POST'])
 def render_booking_done():
     clientName = request.form.get("clientName")
     clientPhone = request.form.get("clientPhone")
@@ -173,4 +173,4 @@ def render_booking_done():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
